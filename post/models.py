@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     image = models.FileField(upload_to="post_images/")
     likes = models.IntegerField(default=0)
     reposts = models.IntegerField(default=0)
-
+print('asdfasdf')
 class Comment(models.Model):
     text = models.CharField(max_length=150)
     date = models.DateTimeField(auto_now_add=True)
