@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from datetime import datetime
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from . import forms, models
 from .models import BlogPost, Comment
@@ -40,6 +40,17 @@ class BlogCreateView(CreateView):
 
     def form_valid(self, form):
         return super().form_valid(form=form)
+
+class PostChangeView(UpdateView):
+    model = BlogPost
+    success_url = '/blog/'
+    fields = {
+        'title',
+        'description'
+    }
+    template_name = 'blog_change.html'
+
+
 
 def create_comment(request, pk):
     if request.method == "POST":

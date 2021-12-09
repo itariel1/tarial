@@ -8,6 +8,7 @@ urlpatterns = [
     path("hello", views.hello_world_view),
     path("date/", views.date_view),
     path("", views.blog_view),
+    path("<int:pk>/change/", views.PostChangeView.as_view()),
     path("create/", views.BlogCreateView.as_view()),
     path("<int:pk>/", views.post_detail, name="post-detail"),
     path("<int:pk>/comment/", views.create_comment),
