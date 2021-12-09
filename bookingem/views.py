@@ -3,6 +3,9 @@ from django.views.generic import ListView, UpdateView, DetailView, DeleteView, C
 from . import models, forms
 from django.shortcuts import get_object_or_404
 # Create your views here.
+from .models import Books
+
+
 class BookListView(ListView):
     template_name = 'books/book_list.html'
     queryset = models.Books.objects.all()
@@ -20,7 +23,9 @@ class BookCreateView(CreateView):
             return super().form_valid(form=form)
 
 class BookDetailView(DetailView):
-    template_name = 'book/book_detail.html'
+    queryset = Books.objects.all()
+    context_object_name = 'object'
+    template_name = 'books/book_detail.html'
 
 
     def get_object(self, **kwargs):

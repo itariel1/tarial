@@ -1,7 +1,12 @@
 from django.http import HttpResponse
 from datetime import datetime
+
+from django.views.generic import CreateView
+
+from . import forms, models
 from .models import BlogPost, Comment
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 
@@ -26,8 +31,15 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post_id=pk).order_by("-date")
     return render(request, "blog_detail.html", context={"post": post, "comments": comments})
 
-def form_view(request):
-    return render(request, 'form.html')
+
+class BlogCreateView(CreateView):
+    template_name = 'blog_create.html'
+    form_class = forms.BlogForm
+    success_url = '/blog/'
+    queryset = models.BlogPost.objects.all()
+
+    def form_valid(self, form):
+        return super().form_valid(form=form)
 
 def create_comment(request, pk):
     if request.method == "POST":

@@ -1,15 +1,16 @@
 
 from django.urls import path
-from .views import hello_world_view, date_view, blog_view, post_detail, create_comment
+from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path("hello", hello_world_view),
-    path("date/", date_view),
-    path("", blog_view),
-    path("<int:pk>/", post_detail, name="post-detail"),
-    path("<int:pk>/comment/", create_comment),
+    path("hello", views.hello_world_view),
+    path("date/", views.date_view),
+    path("", views.blog_view),
+    path("create/", views.BlogCreateView.as_view()),
+    path("<int:pk>/", views.post_detail, name="post-detail"),
+    path("<int:pk>/comment/", views.create_comment),
  ] \
 + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
 + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
