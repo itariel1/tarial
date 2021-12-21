@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Anime Parser</title>
+    <title>Login</title>
 </head>
 <body>
-<div>
-    <form method="POST">
+    <form action="" method="GET">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="Submit" value="Parse"/>
+        <button type="Submit">Log In</button>
     </form>
-</div>
 </body>
 </html>
